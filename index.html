@@ -3,296 +3,326 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SFCA // CYBER DEFENSE MATRIX</title>
+<title>SFCA Cyber Defense Matrix</title>
 <style>
 :root {
-  /* Refined, professional dark theme */
-  --bg: #080b12;
-  --panel-bg: #111827;
-  --text-main: #e2e8f0;
-  --text-muted: #94a3b8;
+  /* Professional Light Corporate Theme */
+  --bg-app: #f4f6f8;
+  --bg-panel: #ffffff;
+  --bg-alt: #f8fafc;
   
-  /* Professional Cyberpunk Palette */
-  --neon-green: #10b981;  /* Emerald */
-  --neon-cyan: #06b6d4;   /* Cyan */
-  --neon-red: #ef4444;    /* Rose/Red */
-  --neon-purple: #8b5cf6; /* Violet */
-  --neon-orange: #f97316; /* Orange */
-  --neon-yellow: #eab308; /* Yellow */
-  --panel-border: rgba(6, 182, 212, 0.25);
+  --text-main: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
   
-  /* Fonts */
-  --font-sans: 'Inter', 'Segoe UI', Roboto, Helvetica, sans-serif;
-  --font-mono: 'Fira Code', 'Courier New', Consolas, monospace;
+  --border-light: #e2e8f0;
+  --border-strong: #cbd5e1;
+  
+  /* Accessible Data Visualization Palette */
+  --color-sfca: #2563eb;  /* Corporate Blue */
+  --color-dqn: #7c3aed;   /* Violet */
+  --color-soar: #ea580c;  /* Orange/Amber */
+  --color-noop: #64748b;  /* Slate/Gray */
+  
+  /* Status Colors */
+  --status-success: #059669; /* Emerald */
+  --status-danger: #dc2626;  /* Red */
+  --status-warning: #d97706; /* Amber */
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'ui-monospace', 'SFMono-Regular', Consolas, 'Courier New', monospace;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: var(--bg);
+  background: var(--bg-app);
   color: var(--text-main);
   font-family: var(--font-sans);
-  overflow-x: hidden;
-  min-height: 100vh;
-  line-height: 1.5;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Subtle grid background */
-body::before {
-  content: '';
-  position: fixed; top:0; left:0; width:100%; height:100%;
-  background-image:
-    linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none; z-index:0;
+.content { 
+  max-width: 1800px;
+  margin: 0 auto;
+  padding-bottom: 3rem;
 }
-
-.content { position: relative; z-index: 2; padding-bottom: 2rem; }
 
 /* HEADER */
 header {
+  background: var(--bg-panel);
+  padding: 2rem;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
   text-align: center;
-  padding: 32px 20px 24px;
-  border-bottom: 1px solid var(--panel-border);
-  background: linear-gradient(180deg, rgba(6, 182, 212, 0.05) 0%, transparent 100%);
 }
-.glitch-title {
-  font-size: clamp(2rem, 4vw, 3rem);
+.header-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 800;
-  color: #fff;
-  font-family: var(--font-mono);
-  text-shadow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(6, 182, 212, 0.4);
-  letter-spacing: 0.1em;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
 }
-
-.subtitle { 
-  color: var(--text-muted); 
-  font-size: 1rem; 
-  letter-spacing: 0.1em; 
-  font-weight: 600;
-  text-transform: uppercase;
+.header-subtitle { 
+  color: var(--text-secondary); 
+  font-size: 1.1rem; 
+  font-weight: 500;
 }
-.subtitle-stats {
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  margin-top: 8px;
-  color: var(--neon-cyan);
-  font-weight: bold;
+.header-stats {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 6px 16px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 /* TABS */
 .tabs {
   display: flex;
-  border-bottom: 1px solid var(--panel-border);
-  background: var(--panel-bg);
   justify-content: center;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border-strong);
+  gap: 2rem;
 }
 .tab-btn {
   background: transparent; 
-  color: var(--text-muted);
+  color: var(--text-secondary);
   border: none; 
-  padding: 16px 32px;
-  font-family: var(--font-mono); 
-  font-size: 0.9rem; 
-  font-weight: bold;
-  letter-spacing: 0.05em;
+  padding: 1rem 1.5rem;
+  font-family: var(--font-sans); 
+  font-size: 1.05rem; 
+  font-weight: 600;
   cursor: pointer; 
-  transition: all 0.2s;
   border-bottom: 3px solid transparent;
+  transition: all 0.2s;
 }
-.tab-btn:hover { 
-  color: var(--text-main); 
-  background: rgba(6, 182, 212, 0.05); 
-}
+.tab-btn:hover { color: var(--color-sfca); }
 .tab-btn.active {
-  color: var(--neon-cyan); 
-  text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
-  border-bottom: 3px solid var(--neon-cyan);
-  background: rgba(6, 182, 212, 0.1);
+  color: var(--color-sfca); 
+  border-bottom-color: var(--color-sfca);
 }
 
 /* SCENARIO BAR */
 .scenario-bar {
-  display: flex; align-items: center; gap: 12px; padding: 16px 24px;
-  background: rgba(17, 24, 39, 0.8); border-bottom: 1px solid var(--panel-border);
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+  padding: 1.25rem 2rem;
+  background: var(--bg-panel); 
+  border-bottom: 1px solid var(--border-light);
   flex-wrap: wrap;
 }
-.scenario-label { font-size: 0.85rem; font-weight: bold; color: var(--text-muted); letter-spacing: 0.05em; }
+.scenario-label { font-size: 0.95rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
 .scenario-btn {
-  background: rgba(255, 255, 255, 0.03); color: var(--text-main);
-  border: 1px solid rgba(255, 255, 255, 0.1); padding: 8px 16px; border-radius: 4px;
-  font-family: var(--font-sans); font-size: 0.85rem; font-weight: 600; cursor: pointer;
-  transition: all 0.2s;
+  background: var(--bg-app); 
+  color: var(--text-main);
+  border: 1px solid var(--border-strong); 
+  padding: 8px 16px; 
+  border-radius: 6px;
+  font-family: var(--font-sans); 
+  font-size: 0.95rem; 
+  font-weight: 500; 
+  cursor: pointer;
+  transition: all 0.15s;
 }
-.scenario-btn:hover {
-  background: rgba(6, 182, 212, 0.1); border-color: var(--neon-cyan);
-}
+.scenario-btn:hover { background: #e2e8f0; }
 .scenario-btn.active {
-  background: rgba(16, 185, 129, 0.15); border-color: var(--neon-green);
-  color: var(--neon-green); text-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+  background: #eff6ff; 
+  border-color: var(--color-sfca);
+  color: var(--color-sfca); 
+  font-weight: 700;
 }
-.sim-controls { margin-left: auto; display: flex; gap: 12px; align-items: center; }
-.speed-ctrl { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-family: var(--font-mono); }
-input[type=range] { accent-color: var(--neon-cyan); width: 100px; cursor: pointer; }
+.sim-controls { margin-left: auto; display: flex; gap: 16px; align-items: center; }
+.speed-ctrl { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.95rem; color: var(--text-secondary); }
+input[type=range] { accent-color: var(--color-sfca); cursor: pointer; }
 .ctrl-btn {
-  background: rgba(6, 182, 212, 0.1); color: var(--neon-cyan);
-  border: 1px solid var(--neon-cyan); padding: 8px 20px; border-radius: 4px;
-  font-family: var(--font-mono); font-size: 0.85rem; font-weight: bold; cursor: pointer;
-  transition: all 0.2s;
+  background: var(--color-sfca); 
+  color: white;
+  border: none; 
+  padding: 10px 24px; 
+  border-radius: 6px;
+  font-size: 0.95rem; 
+  font-weight: 600; 
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.2s;
 }
-.ctrl-btn:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 12px rgba(6, 182, 212, 0.6); }
+.ctrl-btn:hover { background: #1d4ed8; }
+.btn-outline { background: white; color: var(--text-main); border: 1px solid var(--border-strong); }
+.btn-outline:hover { background: #f8fafc; }
 
 /* SIM GRID */
 .sim-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 16px; padding: 24px;
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
+  gap: 1.5rem; 
+  padding: 2rem;
 }
 .sim-panel { 
-  background: var(--panel-bg); 
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 6px;
+  background: var(--bg-panel); 
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
   display: flex; flex-direction: column; 
   overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 .panel-header {
-  padding: 12px 16px; font-size: 0.9rem;
+  padding: 1rem 1.25rem; 
   display: flex; justify-content: space-between; align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-alt);
 }
-.panel-title { font-weight: 800; font-family: var(--font-sans); letter-spacing: 0.05em; }
-.panel-stats { display: flex; gap: 12px; font-size: 0.85rem; font-family: var(--font-mono); font-weight: bold; }
-.stat-cre { color: var(--text-muted); }
-.stat-iss { color: var(--neon-red); }
-.stat-iss.zero { color: var(--neon-green); }
-canvas.net-canvas { width: 100%; display: block; background: #080b12; }
+.panel-title { font-weight: 800; font-size: 1.1rem; }
+.panel-stats { display: flex; gap: 1rem; font-size: 0.95rem; font-family: var(--font-mono); font-weight: 700; }
+.stat-cre { color: var(--text-secondary); }
+.stat-iss { color: var(--status-danger); }
+.stat-iss.zero { color: var(--status-success); }
+canvas.net-canvas { width: 100%; height: auto; display: block; background: #ffffff; border-bottom: 1px solid var(--border-light); }
 
-.cre-bar-wrap { padding: 12px 16px; border-top: 1px solid rgba(255, 255, 255, 0.05); background: rgba(0,0,0,0.2); }
-.cre-bar-label { display: flex; justify-content: space-between; font-size: 0.8rem; font-family: var(--font-mono); margin-bottom: 6px; color: var(--text-muted); }
-.cre-bar-track { height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 3px; overflow: hidden; }
-.cre-bar-fill { height: 100%; border-radius: 3px; transition: width 0.25s ease-out; }
+.cre-bar-wrap { padding: 1rem 1.25rem; background: var(--bg-panel); }
+.cre-bar-label { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; color: var(--text-secondary); }
+.cre-bar-track { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+.cre-bar-fill { height: 100%; border-radius: 4px; transition: width 0.25s ease-out; }
 
-.vchart-wrap { padding: 8px 16px 16px; background: rgba(0,0,0,0.2); }
-canvas.v-chart { width: 100%; height: 60px; display: block; border-radius: 4px; }
+.vchart-wrap { padding: 0 1.25rem 1.25rem; background: var(--bg-panel); }
+canvas.v-chart { width: 100%; height: 80px; display: block; }
 
 /* LOG SECTION */
 .log-section {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-  padding: 0 24px 24px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem;
+  padding: 0 2rem 2rem;
 }
-.log-panel { background: var(--panel-bg); padding: 16px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.05); }
-.log-title { font-size: 0.9rem; font-weight: bold; font-family: var(--font-mono); margin-bottom: 12px; }
+.log-panel { 
+  background: var(--bg-panel); 
+  padding: 1.5rem; 
+  border-radius: 8px; 
+  border: 1px solid var(--border-light); 
+  box-shadow: var(--shadow-md);
+}
+.log-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
 .event-log {
-  background: #080b12; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 4px;
-  padding: 12px; font-size: 0.85rem; font-family: var(--font-mono); height: 200px; overflow-y: auto;
+  background: var(--bg-alt); 
+  border: 1px solid var(--border-light); 
+  border-radius: 6px;
+  padding: 1rem; 
+  font-size: 0.95rem; 
+  font-family: var(--font-mono); 
+  height: 250px; 
+  overflow-y: auto;
 }
-.event-log::-webkit-scrollbar { width: 6px; }
-.event-log::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
-.event-log::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
-.log-entry { margin-bottom: 6px; line-height: 1.4; }
-.log-entry.attack { color: var(--neon-red); }
-.log-entry.block  { color: var(--neon-orange); }
-.log-entry.approve { color: var(--neon-green); }
-.log-entry.info  { color: var(--text-muted); }
-.log-entry.noop  { color: #64748b; }
+.event-log::-webkit-scrollbar { width: 8px; }
+.event-log::-webkit-scrollbar-track { background: #f1f5f9; }
+.event-log::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+.log-entry { margin-bottom: 8px; line-height: 1.5; padding-bottom: 4px; border-bottom: 1px dashed #e2e8f0; }
+.log-entry:last-child { border-bottom: none; }
+.log-entry.attack { color: var(--status-danger); font-weight: 600; }
+.log-entry.block  { color: var(--status-warning); font-weight: 600;}
+.log-entry.approve { color: var(--status-success); font-weight: 600; }
+.log-entry.info  { color: var(--text-secondary); }
+.log-entry.noop  { color: var(--text-muted); }
 
 /* CHARTS TAB */
 .charts-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 32px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); gap: 2rem; padding: 2rem;
 }
 .chart-panel {
-  background: var(--panel-bg); border: 1px solid var(--panel-border); padding: 24px; border-radius: 8px;
+  background: var(--bg-panel); border: 1px solid var(--border-light); padding: 2rem; border-radius: 8px; box-shadow: var(--shadow-md);
 }
-.chart-title { font-size: 1rem; font-weight: bold; color: var(--text-main); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-.chart-title::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--neon-cyan); border-radius: 50%; }
-canvas.bar-chart { width: 100%; display: block; border-radius: 4px; }
+.chart-title { font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-light); padding-bottom: 0.5rem; }
+canvas.bar-chart { width: 100%; height: auto; display: block; }
 
 /* GOVERNOR TAB */
-.gov-container { display: grid; grid-template-columns: 350px 1fr; gap: 32px; padding: 32px; }
-.gov-flow { display: flex; flex-direction: column; gap: 12px; }
+.gov-container { display: grid; grid-template-columns: 450px 1fr; gap: 3rem; padding: 2rem; align-items: start; }
+@media (max-width: 1024px) { .gov-container { grid-template-columns: 1fr; } }
+.gov-flow { display: flex; flex-direction: column; gap: 1rem; }
 .gov-layer {
-  background: rgba(0,0,0,0.3); border: 1px solid rgba(255, 255, 255, 0.1); padding: 16px; border-radius: 6px;
-  position: relative; transition: all 0.3s;
+  background: var(--bg-panel); border: 1px solid var(--border-strong); padding: 1.25rem; border-radius: 8px;
+  position: relative; transition: all 0.3s; box-shadow: var(--shadow-sm);
 }
-.gov-layer.checking { animation: gov-pulse 0.8s ease-in-out infinite alternate; }
-.gov-layer.pass  { border-color: var(--neon-green); background: rgba(16, 185, 129, 0.05); }
-.gov-layer.fail  { border-color: var(--neon-red);   background: rgba(239, 68, 68, 0.05); }
-.gov-layer.idle  { border-color: rgba(255, 255, 255, 0.1); }
-@keyframes gov-pulse {
-  from { box-shadow: 0 0 5px rgba(6, 182, 212, 0.2); border-color: rgba(6, 182, 212, 0.5); }
-  to   { box-shadow: 0 0 15px rgba(6, 182, 212, 0.6); border-color: var(--neon-cyan); }
-}
-.gov-layer-name { font-weight: bold; font-size: 0.95rem; margin-bottom: 6px; font-family: var(--font-mono); }
-.gov-layer-desc { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; }
-.gov-status { position: absolute; top: 16px; right: 16px; font-size: 0.85rem; font-family: var(--font-mono); font-weight: bold; }
-.gov-arrow { text-align: center; color: var(--text-muted); font-size: 1.5rem; opacity: 0.5; margin: -4px 0; }
-.gov-output-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.gov-layer.checking { border-color: var(--color-sfca); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); }
+.gov-layer.pass  { border-color: var(--status-success); background: #ecfdf5; }
+.gov-layer.fail  { border-color: var(--status-danger);  background: #fef2f2; }
+.gov-layer-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; color: var(--text-main); }
+.gov-layer-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; }
+.gov-status { position: absolute; top: 1.25rem; right: 1.25rem; font-size: 0.95rem; font-weight: 700; }
+.gov-arrow { text-align: center; color: var(--text-muted); font-size: 1.5rem; margin: -0.5rem 0; }
+.gov-output-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
 /* RESULTS TABLE */
-.results-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 16px; background: var(--panel-bg); border-radius: 6px; overflow: hidden; }
-.results-table th { text-align: left; padding: 12px 16px; background: rgba(0,0,0,0.4); color: var(--text-main); font-weight: 600; border-bottom: 2px solid rgba(255,255,255,0.05); }
-.results-table td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); font-family: var(--font-mono); }
-.results-table tr:hover { background: rgba(255,255,255,0.02); }
+.results-table { width: 100%; border-collapse: collapse; font-size: 1rem; margin-top: 1rem; background: var(--bg-panel); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); }
+.results-table th { text-align: left; padding: 1rem; background: var(--bg-alt); color: var(--text-main); font-weight: 700; border-bottom: 2px solid var(--border-strong); }
+.results-table td { padding: 1rem; border-bottom: 1px solid var(--border-light); color: var(--text-secondary); }
+.results-table tr:hover { background: #f8fafc; }
 
 /* ISS explainer */
 .iss-box {
-  font-size: 0.9rem; line-height: 1.6; color: var(--text-main);
-  background: var(--panel-bg); border-left: 4px solid var(--neon-cyan); padding: 16px 20px;
-  margin-top: 24px; border-radius: 0 6px 6px 0;
+  font-size: 1rem; line-height: 1.6; color: var(--text-main);
+  background: var(--bg-panel); border-left: 5px solid var(--color-sfca); padding: 1.5rem;
+  margin-top: 1.5rem; border-radius: 0 8px 8px 0; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); border-left-width: 5px;
 }
+.iss-box-warn { border-left-color: var(--color-soar); }
 
 /* FOOTER */
 .footer-bar {
-  padding: 16px 32px; font-size: 0.85rem; color: var(--text-muted); font-family: var(--font-mono);
-  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 1.5rem 2rem; font-size: 0.95rem; color: var(--text-muted); font-weight: 500;
+  border-top: 1px solid var(--border-light);
   display: flex; justify-content: space-between;
-  background: var(--bg);
+  background: var(--bg-panel);
+  margin-top: 2rem;
 }
 
 .hidden { display: none !important; }
 
+/* Clean flash animation for violations */
 @keyframes vflash {
-  0%   { box-shadow: inset 0 0 0 2px transparent; }
-  20%  { box-shadow: inset 0 0 0 4px var(--neon-red); }
-  100% { box-shadow: inset 0 0 0 2px transparent; }
+  0%   { background-color: var(--bg-panel); }
+  20%  { background-color: #fef2f2; border-color: var(--status-danger); }
+  100% { background-color: var(--bg-panel); }
 }
-.vflash { animation: vflash 0.6s ease; }
+.vflash { animation: vflash 0.8s ease; }
 </style>
 </head>
 <body>
 <div class="content">
 
 <header>
-  <div class="glitch-title">SFCA // CYBER DEFENSE MATRIX</div>
-  <div class="subtitle">SECURITY FEEDBACK CONTROL ARCHITECTURE · MITRE ATT&amp;CK LIVE SIMULATION</div>
-  <div class="subtitle-stats">ISS-Constrained Autonomous Defense · 900-Run Benchmark · ZERO Stability Violations</div>
+  <div class="header-title">SFCA Cyber Defense Matrix</div>
+  <div class="header-subtitle">Security Feedback Control Architecture &middot; MITRE ATT&amp;CK Live Simulation</div>
+  <div class="header-stats">ISS-Constrained Autonomous Defense &middot; 900-Run Benchmark &middot; ZERO Stability Violations</div>
 </header>
 
 <div class="tabs">
-  <button class="tab-btn active" onclick="switchTab('sim',this)">LIVE SIMULATION</button>
-  <button class="tab-btn" onclick="switchTab('charts',this)">BENCHMARK CHARTS</button>
-  <button class="tab-btn" onclick="switchTab('governor',this)">GOVERNOR INTERNALS</button>
+  <button class="tab-btn active" onclick="switchTab('sim',this)">Live Simulation</button>
+  <button class="tab-btn" onclick="switchTab('charts',this)">Benchmark Charts</button>
+  <button class="tab-btn" onclick="switchTab('governor',this)">Governor Internals</button>
 </div>
 
 <!-- ═══════════════ TAB: SIMULATION ═══════════════ -->
 <div id="tab-sim">
   <div class="scenario-bar">
-    <span class="scenario-label">SCENARIO:</span>
-    <button class="scenario-btn active" onclick="selScenario(0,this)">S1: SQL BURST (T1190)</button>
-    <button class="scenario-btn" onclick="selScenario(1,this)">S2: LATERAL MOVE (T1021)</button>
-    <button class="scenario-btn" onclick="selScenario(2,this)">S3: CRED STUFFING (T1110)</button>
-    <button class="scenario-btn" onclick="selScenario(3,this)">S4: RANSOMWARE (T1486)</button>
-    <button class="scenario-btn" onclick="selScenario(4,this)">S5: INSIDER THREAT (T1078)</button>
+    <span class="scenario-label">Scenario Overview</span>
+    <button class="scenario-btn active" onclick="selScenario(0,this)">S1: SQL Burst (T1190)</button>
+    <button class="scenario-btn" onclick="selScenario(1,this)">S2: Lateral Move (T1021)</button>
+    <button class="scenario-btn" onclick="selScenario(2,this)">S3: Cred Stuffing (T1110)</button>
+    <button class="scenario-btn" onclick="selScenario(3,this)">S4: Ransomware (T1486)</button>
+    <button class="scenario-btn" onclick="selScenario(4,this)">S5: Insider Threat (T1078)</button>
+    
     <div class="sim-controls">
       <div class="speed-ctrl">
-        <span>SPEED:</span>
+        <span>Playback Speed:</span>
         <input type="range" id="spd" min="1" max="12" value="5" oninput="setSpeed(+this.value)">
         <span id="spdLbl">5x</span>
       </div>
-      <button class="ctrl-btn" id="runBtn" onclick="toggleRun()">EXECUTE SIM</button>
-      <button class="ctrl-btn" onclick="resetSim()" style="background: transparent; border-color: rgba(255,255,255,0.2); color: var(--text-main);">RESET</button>
+      <button class="ctrl-btn" id="runBtn" onclick="toggleRun()">Execute Simulation</button>
+      <button class="ctrl-btn btn-outline" onclick="resetSim()">Reset</button>
     </div>
   </div>
 
@@ -300,76 +330,77 @@ canvas.bar-chart { width: 100%; display: block; border-radius: 4px; }
     <!-- SFCA -->
     <div class="sim-panel" id="panel-sfca">
       <div class="panel-header">
-        <span class="panel-title" style="color:var(--neon-green);">▸ SFCA (OURS)</span>
+        <span class="panel-title" style="color:var(--color-sfca);">■ SFCA (Proposed)</span>
         <div class="panel-stats">
           <span class="stat-cre">CRE: <span id="c-sfca-cre">0</span></span>
           <span class="stat-iss zero" id="c-sfca-iss">ISS:0</span>
         </div>
       </div>
-      <canvas id="cv-sfca" class="net-canvas" width="400" height="280"></canvas>
+      <!-- Rendered 2x resolution internally for crisp display -->
+      <canvas id="cv-sfca" class="net-canvas" width="800" height="500"></canvas>
       <div class="cre-bar-wrap">
-        <div class="cre-bar-label"><span>V(x) LYAPUNOV</span><span id="c-sfca-vx">0.000</span></div>
-        <div class="cre-bar-track"><div class="cre-bar-fill" id="b-sfca" style="background:var(--neon-green);width:0%"></div></div>
+        <div class="cre-bar-label"><span>V(x) Lyapunov Value</span><span id="c-sfca-vx">0.000</span></div>
+        <div class="cre-bar-track"><div class="cre-bar-fill" id="b-sfca" style="background:var(--color-sfca);width:0%"></div></div>
       </div>
-      <div class="vchart-wrap"><canvas id="vc-sfca" class="v-chart" width="400" height="60"></canvas></div>
+      <div class="vchart-wrap"><canvas id="vc-sfca" class="v-chart" width="800" height="120"></canvas></div>
     </div>
     <!-- DQN -->
     <div class="sim-panel" id="panel-dqn">
       <div class="panel-header">
-        <span class="panel-title" style="color:var(--neon-purple);">▸ DQN (RL AGENT)</span>
+        <span class="panel-title" style="color:var(--color-dqn);">■ DQN (RL Agent)</span>
         <div class="panel-stats">
           <span class="stat-cre">CRE: <span id="c-dqn-cre">0</span></span>
           <span class="stat-iss" id="c-dqn-iss">ISS:0</span>
         </div>
       </div>
-      <canvas id="cv-dqn" class="net-canvas" width="400" height="280"></canvas>
+      <canvas id="cv-dqn" class="net-canvas" width="800" height="500"></canvas>
       <div class="cre-bar-wrap">
-        <div class="cre-bar-label"><span>V(x) LYAPUNOV</span><span id="c-dqn-vx">0.000</span></div>
-        <div class="cre-bar-track"><div class="cre-bar-fill" id="b-dqn" style="background:var(--neon-purple);width:0%"></div></div>
+        <div class="cre-bar-label"><span>V(x) Lyapunov Value</span><span id="c-dqn-vx">0.000</span></div>
+        <div class="cre-bar-track"><div class="cre-bar-fill" id="b-dqn" style="background:var(--color-dqn);width:0%"></div></div>
       </div>
-      <div class="vchart-wrap"><canvas id="vc-dqn" class="v-chart" width="400" height="60"></canvas></div>
+      <div class="vchart-wrap"><canvas id="vc-dqn" class="v-chart" width="800" height="120"></canvas></div>
     </div>
     <!-- SOAR -->
     <div class="sim-panel" id="panel-soar">
       <div class="panel-header">
-        <span class="panel-title" style="color:var(--neon-orange);">▸ REACTIVE SOAR</span>
+        <span class="panel-title" style="color:var(--color-soar);">■ Reactive SOAR</span>
         <div class="panel-stats">
           <span class="stat-cre">CRE: <span id="c-soar-cre">0</span></span>
           <span class="stat-iss" id="c-soar-iss">ISS:0</span>
         </div>
       </div>
-      <canvas id="cv-soar" class="net-canvas" width="400" height="280"></canvas>
+      <canvas id="cv-soar" class="net-canvas" width="800" height="500"></canvas>
       <div class="cre-bar-wrap">
-        <div class="cre-bar-label"><span>V(x) LYAPUNOV</span><span id="c-soar-vx">0.000</span></div>
-        <div class="cre-bar-track"><div class="cre-bar-fill" id="b-soar" style="background:var(--neon-orange);width:0%"></div></div>
+        <div class="cre-bar-label"><span>V(x) Lyapunov Value</span><span id="c-soar-vx">0.000</span></div>
+        <div class="cre-bar-track"><div class="cre-bar-fill" id="b-soar" style="background:var(--color-soar);width:0%"></div></div>
       </div>
-      <div class="vchart-wrap"><canvas id="vc-soar" class="v-chart" width="400" height="60"></canvas></div>
+      <div class="vchart-wrap"><canvas id="vc-soar" class="v-chart" width="800" height="120"></canvas></div>
     </div>
     <!-- NOOP -->
     <div class="sim-panel" id="panel-noop">
       <div class="panel-header">
-        <span class="panel-title" style="color:var(--neon-red);">▸ NO-OP (BASELINE)</span>
+        <span class="panel-title" style="color:var(--color-noop);">■ No-Op (Baseline)</span>
         <div class="panel-stats">
           <span class="stat-cre">CRE: <span id="c-noop-cre">0</span></span>
           <span class="stat-iss zero" id="c-noop-iss">ISS:0</span>
         </div>
       </div>
-      <canvas id="cv-noop" class="net-canvas" width="400" height="280"></canvas>
+      <canvas id="cv-noop" class="net-canvas" width="800" height="500"></canvas>
       <div class="cre-bar-wrap">
-        <div class="cre-bar-label"><span>V(x) LYAPUNOV</span><span id="c-noop-vx">0.000</span></div>
-        <div class="cre-bar-track"><div class="cre-bar-fill" id="b-noop" style="background:var(--neon-red);width:0%"></div></div>
+        <div class="cre-bar-label"><span>V(x) Lyapunov Value</span><span id="c-noop-vx">0.000</span></div>
+        <div class="cre-bar-track"><div class="cre-bar-fill" id="b-noop" style="background:var(--color-noop);width:0%"></div></div>
       </div>
-      <div class="vchart-wrap"><canvas id="vc-noop" class="v-chart" width="400" height="60"></canvas></div>
+      <div class="vchart-wrap"><canvas id="vc-noop" class="v-chart" width="800" height="120"></canvas></div>
     </div>
   </div>
 
   <div class="log-section">
     <div class="log-panel">
-      <div class="log-title" style="color:var(--neon-cyan);">■ SFCA GOVERNOR LOG</div>
+      <div class="log-title" style="color:var(--color-sfca);">SFCA Governor Logs</div>
       <div class="event-log" id="log-sfca"></div>
     </div>
     <div class="log-panel">
-      <div class="log-title" style="color:var(--text-muted);">■ ATTACK EVENT STREAM</div>
+      <div class="log-title">Global Attack Event Stream</div>
       <div class="event-log" id="log-global"></div>
     </div>
   </div>
@@ -379,20 +410,20 @@ canvas.bar-chart { width: 100%; display: block; border-radius: 4px; }
 <div id="tab-charts" class="hidden">
   <div class="charts-grid">
     <div class="chart-panel">
-      <div class="chart-title">MEAN ISS VIOLATIONS PER RUN (LOG SCALE)</div>
-      <canvas id="ch-iss" class="bar-chart" width="600" height="350"></canvas>
+      <div class="chart-title">Mean ISS Violations Per Run (Log Scale)</div>
+      <canvas id="ch-iss" class="bar-chart" width="1000" height="550"></canvas>
     </div>
     <div class="chart-panel">
-      <div class="chart-title">MEAN CUMULATIVE RISK ENERGY BY CONTROLLER</div>
-      <canvas id="ch-cre" class="bar-chart" width="600" height="350"></canvas>
+      <div class="chart-title">Mean Cumulative Risk Energy (CRE) By Controller</div>
+      <canvas id="ch-cre" class="bar-chart" width="1000" height="550"></canvas>
     </div>
     <div class="chart-panel">
-      <div class="chart-title">PER-SCENARIO CRE BREAKDOWN</div>
-      <canvas id="ch-scenario" class="bar-chart" width="600" height="350"></canvas>
+      <div class="chart-title">Per-Scenario CRE Breakdown</div>
+      <canvas id="ch-scenario" class="bar-chart" width="1000" height="550"></canvas>
     </div>
     <div class="chart-panel">
-      <div class="chart-title">GOVERNOR BLOCK RATE vs ACTION COUNT</div>
-      <canvas id="ch-block" class="bar-chart" width="600" height="350"></canvas>
+      <div class="chart-title">Governor Block Rate vs Action Count</div>
+      <canvas id="ch-block" class="bar-chart" width="1000" height="550"></canvas>
     </div>
   </div>
 </div>
@@ -401,82 +432,82 @@ canvas.bar-chart { width: 100%; display: block; border-radius: 4px; }
 <div id="tab-governor" class="hidden">
   <div class="gov-container">
     <div class="gov-flow">
-      <div style="font-size:1.1rem;font-weight:bold;color:var(--text-main);margin-bottom:8px;">THREE-LAYER STABILITY GOVERNOR</div>
+      <div style="font-size:1.25rem;font-weight:800;color:var(--text-main);margin-bottom:8px;">Three-Layer Stability Governor Pipeline</div>
 
       <div class="gov-layer idle" id="gl-input">
-        <div class="gov-layer-name">INPUT: MPC PROPOSAL</div>
-        <div class="gov-layer-desc">Evaluates 7,776 sequences over H=5 horizon<br>Proposes optimal action u*</div>
+        <div class="gov-layer-name">Input Phase: MPC Proposal</div>
+        <div class="gov-layer-desc">Evaluates 7,776 theoretical sequences over H=5 horizon to propose optimal action u*.</div>
         <div class="gov-status" id="gs-input">WAITING</div>
       </div>
       <div class="gov-arrow">↓</div>
       <div class="gov-layer idle" id="gl-l1">
-        <div class="gov-layer-name">LAYER 1: ISS BOUND CHECK</div>
-        <div class="gov-layer-desc">V(x_{t+k}) ≤ φ^k·V(x_t) + ψ(k,d_max)<br>Compound decay at effect step t+τ_u</div>
+        <div class="gov-layer-name">Layer 1: Input-to-State Stability (ISS) Bound Check</div>
+        <div class="gov-layer-desc">Mathematically verifies V(x_{t+k}) ≤ φ^k·V(x_t) + ψ(k,d_max) before allowing execution.</div>
         <div class="gov-status" id="gs-l1">—</div>
       </div>
       <div class="gov-arrow">↓</div>
       <div class="gov-layer idle" id="gl-l2">
-        <div class="gov-layer-name">LAYER 2: COOLDOWN CHECK</div>
-        <div class="gov-layer-desc">⌈τ_c/τ_s⌉ = 2 cycles · No action thrashing<br>10-second window at 5-second control rate</div>
+        <div class="gov-layer-name">Layer 2: Action Cooldown Constraints</div>
+        <div class="gov-layer-desc">Enforces strict ⌈τ_c/τ_s⌉ = 2 cycle delay to prevent action thrashing.</div>
         <div class="gov-status" id="gs-l2">—</div>
       </div>
       <div class="gov-arrow">↓</div>
       <div class="gov-layer idle" id="gl-l3">
-        <div class="gov-layer-name">LAYER 3: AVAILABILITY CAP</div>
-        <div class="gov-layer-desc">Max concurrent host isolations enforced<br>Protects operational availability</div>
+        <div class="gov-layer-name">Layer 3: Operational Availability Cap</div>
+        <div class="gov-layer-desc">Restricts maximum concurrent host isolations to protect network functionality.</div>
         <div class="gov-status" id="gs-l3">—</div>
       </div>
       <div class="gov-arrow">↓</div>
       <div class="gov-output-row">
         <div class="gov-layer idle" id="gl-approve" style="text-align:center;">
-          <div class="gov-layer-name" style="color:var(--neon-green);">✓ EXECUTE</div>
-          <div class="gov-layer-desc">ISS counter = 0<br>Action runs</div>
+          <div class="gov-layer-name" style="color:var(--status-success);">✓ Action Executed</div>
+          <div class="gov-layer-desc">ISS guarantee maintained.</div>
         </div>
         <div class="gov-layer idle" id="gl-block" style="text-align:center;">
-          <div class="gov-layer-name" style="color:var(--neon-red);">✗ NO-OP</div>
-          <div class="gov-layer-desc">Violation blocked<br>NO-OP runs instead</div>
+          <div class="gov-layer-name" style="color:var(--status-danger);">✗ Action Blocked</div>
+          <div class="gov-layer-desc">Fallback to NO-OP state.</div>
         </div>
       </div>
-      <button class="ctrl-btn" style="margin-top:16px;width:100%;padding:12px;" onclick="govDemo()">RUN GOVERNOR DEMO</button>
+      <button class="ctrl-btn" style="margin-top:16px;width:100%;padding:14px;font-size:1.05rem;" onclick="govDemo()">Run Step-by-Step Governor Demo</button>
     </div>
 
     <div>
-      <div style="font-size:1.1rem;font-weight:bold;color:var(--text-main);margin-bottom:12px;">GOVERNOR DECISION LOG</div>
-      <div class="event-log" id="log-gov" style="height:220px;"></div>
+      <div style="font-size:1.25rem;font-weight:800;color:var(--text-main);margin-bottom:12px;">Governor Decision Telemetry Log</div>
+      <div class="event-log" id="log-gov" style="height:260px; background: white; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);"></div>
 
       <div class="iss-box">
-        <div style="margin-bottom:8px;"><span style="color:var(--neon-cyan);font-family:var(--font-mono);">V(x_t) = x_t^T · P · x_t</span> <span style="color:var(--text-muted);">(where P = DARE solution)</span></div>
-        <div style="margin-bottom:8px;"><span style="color:var(--neon-green);font-weight:bold;">ISS CONDITION:</span> <span style="font-family:var(--font-mono);">ΔV(x_t) ≤ −α·V(x_t) + σ·d_max</span></div>
-        <p style="margin-bottom:8px;color:var(--text-muted);">The Governor enforces this theorem BEFORE every action. Any uncertifiable action is instantly blocked.</p>
-        <div><span style="color:var(--neon-yellow);font-weight:bold;">RESULT:</span> Zero violations across all 900 benchmark runs. No other active controller achieves this level of stability.</div>
+        <div style="margin-bottom:12px; font-size: 1.05rem;"><strong style="color:var(--text-main);">V(x_t) = x_t^T · P · x_t</strong> <span style="color:var(--text-muted);">(P represents the DARE solution matrix)</span></div>
+        <div style="margin-bottom:12px; font-size: 1.05rem;"><strong style="color:var(--status-success);">ISS Theorem Condition:</strong> <span>ΔV(x_t) ≤ −α·V(x_t) + σ·d_max</span></div>
+        <p style="margin-bottom:12px;color:var(--text-secondary);">The Governor module programmatically enforces this mathematical proof prior to executing every single action proposed by the MPC engine. Any action unable to be certified is instantly intercepted and blocked.</p>
+        <div style="font-weight: 600;"><span style="color:var(--color-sfca);">Resulting Efficacy:</span> Zero stability violations across all 900 benchmark runs. No other active controller achieves this objective.</div>
       </div>
 
-      <div style="font-size:1.1rem;font-weight:bold;color:var(--text-main);margin-top:32px;margin-bottom:12px;">FULL BENCHMARK RESULTS <span style="font-size:0.85rem;color:var(--text-muted);font-weight:normal;">(30 seeds × 5 scenarios)</span></div>
+      <div style="font-size:1.25rem;font-weight:800;color:var(--text-main);margin-top:2.5rem;margin-bottom:1rem;">Full Empirical Benchmark Results <span style="font-size:1rem;color:var(--text-muted);font-weight:500;">(30 initialization seeds × 5 attack scenarios)</span></div>
       <table class="results-table">
         <thead>
           <tr>
-            <th>CONTROLLER</th>
-            <th style="text-align:right;">MEAN CRE</th>
-            <th style="text-align:right;">ISS VIOL.</th>
-            <th style="text-align:right;">VIOL. RUNS</th>
+            <th>Controller Name</th>
+            <th style="text-align:right;">Mean CRE (Risk)</th>
+            <th style="text-align:right;">Mean ISS Violations</th>
+            <th style="text-align:right;">Runs with Violation</th>
           </tr>
         </thead>
         <tbody id="tbl-results"></tbody>
       </table>
 
-      <div class="iss-box" style="margin-top:24px; border-left-color: var(--neon-orange);">
-        <p style="margin-bottom:8px;"><span style="color:var(--neon-orange);font-weight:bold;">KEY TRADEOFF:</span> SFCA's slightly higher CRE compared to DQN is directly correlated to action count. SFCA averages 65 actions/run, whereas DQN spams 192 actions/run. The governor strictly blocks actions that cannot be mathematically certified.</p>
-        <p style="margin-bottom:8px;">On complex scenarios like <strong>S5 (INSIDER THREAT)</strong>, SFCA outperforms Reactive SOAR by <span style="color:var(--neon-green);font-weight:bold;">3.2×</span>.</p>
-        <p><span style="color:var(--neon-cyan);font-weight:bold;">ABLATION STUDY:</span> Removing the governor but keeping the MPC engine results in ~63 violations/run. The governor is the sole source of the absolute stability guarantee.</p>
+      <div class="iss-box iss-box-warn" style="margin-top:1.5rem;">
+        <p style="margin-bottom:12px;"><strong>Performance Tradeoffs:</strong> SFCA registers slightly higher Cumulative Risk Energy (CRE) compared to the unconstrained DQN agent. This is directly attributable to the strict action throttling enforced by the governor.</p>
+        <p style="margin-bottom:12px;">SFCA averages <strong>65 actions/run</strong>, compared to DQN's <strong>192 actions/run</strong>. DQN floods the network with uncertifiable actions, whereas SFCA only acts when mathematically safe.</p>
+        <p><strong>Ablation Insight:</strong> Disabling the governor module while retaining the MPC core results in an average of 63.45 violations per run. The three-layer governor is the sole mechanism responsible for the absolute stability guarantee.</p>
       </div>
     </div>
   </div>
 </div>
 
 <div class="footer-bar">
-  <span>SFCA — MMCOE PUNE · Khambete, Kulkarni, Vasgi, Chavan · 2024</span>
-  <span id="step-display" style="color:var(--neon-cyan);font-weight:bold;">STEP: 0</span>
-  <span>MITRE ATT&amp;CK v14 · 900 RUNS · p&lt;0.001 WILCOXON</span>
+  <span>MMCOE Research Publication Data &middot; Khambete, Kulkarni, Vasgi, Chavan</span>
+  <span id="step-display" style="color:var(--color-sfca);font-weight:700;">Simulation Step: 0</span>
+  <span>Validating against MITRE ATT&amp;CK v14 Framework &middot; p&lt;0.001 Wilcoxon Signed-Rank</span>
 </div>
 </div>
 
@@ -489,8 +520,8 @@ const PAPER = {
   meanCRE:   [74641, 19308, 13470, 22219, 9657, 272392],
   issViol:   [0, 63.45, 19.79, 16.93, 100.32, 0],
   violRuns:  ['0/150','150/150','150/150','122/150','150/150','0/150'],
-  // Updated hex codes to match modern CSS vars
-  ctrlColors:['#10b981','#34d399','#eab308','#f97316','#8b5cf6','#64748b'], 
+  // Professional Palette
+  ctrlColors:['#2563eb', '#38bdf8', '#fbbf24', '#ea580c', '#7c3aed', '#94a3b8'], 
 
   scNames: ['S1 SQL','S2 Lateral','S3 Cred','S4 Ransom','S5 Insider'],
   scCRE: {
@@ -506,7 +537,7 @@ const PAPER = {
 };
 
 // ═══════════════════════════════════════════════════════════════
-// NETWORK TOPOLOGY (10 nodes from paper)
+// NETWORK TOPOLOGY
 // ═══════════════════════════════════════════════════════════════
 const NODES = [
   {id:0, label:'FW',  type:'fw',  crit:0.90, exp:1.0},
@@ -529,7 +560,7 @@ const WEIGHTS = NODES.map(n => (n.crit * (n.exp === 1.0 ? 1.5 : 1.0)) / 10);
 const ALPHA = 0.94, SMAX = 1.0, PROP = 0.10;
 
 // ═══════════════════════════════════════════════════════════════
-// SCENARIOS
+// SCENARIOS & PHYSICS
 // ═══════════════════════════════════════════════════════════════
 const SCENARIOS = [
   { name:'S1: SQL INJECTION BURST (T1190)', dur:140, attack: t => { const d = new Array(10).fill(0); if(t<55){ d[1]=0.32+Math.random()*0.28; d[2]=0.18+Math.random()*0.22; if(Math.random()<0.4)d[3]=0.14; } return d; }},
@@ -569,6 +600,9 @@ function issPass(xNow, xPred) {
 }
 function issViolated(xNow, xAfter) { return !issPass(xNow, xAfter); }
 
+// ═══════════════════════════════════════════════════════════════
+// CONTROLLERS
+// ═══════════════════════════════════════════════════════════════
 function ctrlSFCA(x, cooldowns, isolations) {
   const actions = ['isolate','block','patch','scan'];
   const byRisk = [...x].map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v);
@@ -601,8 +635,7 @@ function ctrlSOAR(x, soarState) {
 }
 
 const CTRLS = ['sfca','dqn','soar','noop'];
-// Ensure JS canvas matches professional hex codes
-const CCOLORS = {sfca:'#10b981', dqn:'#8b5cf6', soar:'#f97316', noop:'#ef4444'};
+const CCOLORS = {sfca:'#2563eb', dqn:'#7c3aed', soar:'#ea580c', noop:'#64748b'};
 
 let curScenario = 0; let running = false; let step = 0; let timer = null; let delay = 100;
 let states = {}, metrics = {}, vHist = {}, soarState = {};
@@ -617,21 +650,21 @@ function initSim() {
 
 function tick() {
   const sc = SCENARIOS[curScenario];
-  if(step >= sc.dur) { stopSim(); glog(`SIM COMPLETE — ${step} STEPS`, 'info'); return; }
+  if(step >= sc.dur) { stopSim(); glog(`[SIM Complete] Reached ${step} computational steps.`, 'info'); return; }
   const d = sc.attack(step);
 
   CTRLS.forEach(c => {
     const st = states[c]; const xPrev = [...st.x];
     st.x = propagate(st.x, d); st.cooldowns = st.cooldowns.map(v=>Math.max(0,v-1));
-    let action='noop', node=-1, approved=false;
+    let action='noop', node=-1;
 
     if(c==='sfca') {
       const r = ctrlSFCA(st.x, st.cooldowns, st.isolations); action=r.action; node=r.node;
       if(action!=='noop' && node>=0) {
         st.x=applyAction(st.x,action,node); st.cooldowns[node]=2; if(action==='isolate') st.isolations++;
         metrics[c].acts++;
-        if(step%5===0||metrics[c].acts<=20) slog(`[${pad(step)}] ✓ ${action.toUpperCase()} ${NODES[node].label}`, 'approve');
-      } else if(step%20===0) { slog(`[${pad(step)}] GOV: NO-OP (ISS constraint)`, 'block'); }
+        if(step%5===0||metrics[c].acts<=20) slog(`[t=${pad(step)}] Executed ${action.toUpperCase()} on node ${NODES[node].label}. ISS constraints maintained.`, 'approve');
+      } else if(step%20===0) { slog(`[t=${pad(step)}] Governor intervention: Action proposed by MPC failed ISS verification. Falling back to NO-OP.`, 'block'); }
     } else if(c==='dqn') {
       const r=ctrlDQN(st.x,step); action=r.action; node=r.node;
       if(action!=='noop'&&node>=0) {
@@ -654,7 +687,7 @@ function tick() {
   });
 
   const attacked = d.map((v,i)=>v>0.08?NODES[i].label:null).filter(Boolean);
-  if(attacked.length && step%8===0) glog(`[${pad(step)}] ATK → ${attacked.join(' ')} (${sc.name.split(':')[0]})`, 'attack');
+  if(attacked.length && step%8===0) glog(`[t=${pad(step)}] Incoming Threat Vector Detected -> Targeted Nodes: ${attacked.join(', ')}`, 'attack');
 
   step++; updateStepEl(); renderAll();
 }
@@ -664,87 +697,103 @@ function flashPanel(id) {
   el.classList.remove('vflash'); void el.offsetWidth; el.classList.add('vflash');
 }
 
+// ═══════════════════════════════════════════════════════════════
+// UI RENDERING ENGINE
+// ═══════════════════════════════════════════════════════════════
 function renderNetwork(c) {
   const canvas = document.getElementById(`cv-${c}`); if(!canvas) return;
   const ctx=canvas.getContext('2d'); const W=canvas.width, H=canvas.height;
-  ctx.clearRect(0,0,W,H); ctx.fillStyle='#080b12'; ctx.fillRect(0,0,W,H);
+  ctx.clearRect(0,0,W,H); ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,W,H);
 
-  // Subtle grid for professional look
-  ctx.strokeStyle='rgba(6, 182, 212, 0.05)'; ctx.lineWidth=1;
-  for(let gx=0;gx<W;gx+=40){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,H);ctx.stroke();}
-  for(let gy=0;gy<H;gy+=40){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke();}
+  // Clean, subtle corporate grid
+  ctx.strokeStyle='#f1f5f9'; ctx.lineWidth=2;
+  for(let gx=0;gx<W;gx+=60){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,H);ctx.stroke();}
+  for(let gy=0;gy<H;gy+=60){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke();}
 
   const x=states[c].x; const col=CCOLORS[c];
 
+  // Draw Edges
   EDGES.forEach(([s,dst])=>{
     const sx=NPOS[s][0]*W, sy=NPOS[s][1]*H;
     const dx=NPOS[dst][0]*W, dy=NPOS[dst][1]*H;
     const flow=(x[s]+x[dst])/2;
-    ctx.strokeStyle = flow>0.12 ? `rgba(239, 68, 68, ${0.4+flow*0.6})` : `rgba(255,255,255,0.08)`;
-    ctx.lineWidth = 1.5+flow*3; 
+    
+    // Smooth transition from grey (safe) to red (risk)
+    ctx.strokeStyle = flow>0.12 ? `rgba(220, 38, 38, ${0.3+flow*0.7})` : `#e2e8f0`;
+    ctx.lineWidth = 2+flow*6; 
     ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(dx,dy); ctx.stroke();
 
     if(flow>0.18 && step%2===0) {
       const t2=(step*0.06)%1; const px2=sx+(dx-sx)*t2, py2=sy+(dy-sy)*t2;
-      ctx.fillStyle=`rgba(239, 68, 68, ${flow})`;
-      ctx.beginPath(); ctx.arc(px2,py2,2.5,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle=`rgba(220, 38, 38, ${0.8})`;
+      ctx.beginPath(); ctx.arc(px2,py2,4,0,Math.PI*2); ctx.fill();
     }
   });
 
+  // Draw Nodes
   NODES.forEach((nd,i)=>{
     const nx=NPOS[i][0]*W, ny=NPOS[i][1]*H;
-    const risk=x[i]; const radius=12+nd.crit*8; // Increased sizes
+    const risk=x[i]; const radius=22+nd.crit*14; 
 
-    ctx.shadowColor = risk>0.2 ? (risk>0.55?'#ef4444':'#f97316') : col;
-    ctx.shadowBlur  = risk>0.1 ? 15+risk*20 : 6;
-    ctx.fillStyle = risk>0.12 ? `rgb(${Math.floor(180*risk)},${Math.floor(55*(1-risk))},20)` : '#111827';
+    // Risk based coloring (white/blue to solid red)
+    let fillCol = '#ffffff';
+    let strokeCol = col;
+    if(risk > 0.12) {
+      fillCol = `rgba(254, 226, 226, ${risk})`; // Light red wash
+      strokeCol = '#dc2626'; // Strong red border
+    }
+    
+    // Main Node Circle
+    ctx.fillStyle = fillCol;
     ctx.beginPath(); ctx.arc(nx,ny,radius,0,Math.PI*2); ctx.fill();
-
-    ctx.strokeStyle = risk>0.5?'#ef4444':(risk>0.14?'#f97316':col);
-    ctx.lineWidth = risk>0.25?3:2;
+    ctx.strokeStyle = strokeCol;
+    ctx.lineWidth = risk>0.25 ? 5 : 3;
     ctx.beginPath(); ctx.arc(nx,ny,radius,0,Math.PI*2); ctx.stroke();
 
+    // Threat Ring
     if(risk>0.06) {
-      ctx.strokeStyle=`rgba(239, 68, 68, ${risk*0.6})`; ctx.lineWidth=1;
-      ctx.beginPath(); ctx.arc(nx,ny,radius+6+risk*10,0,Math.PI*2); ctx.stroke();
+      ctx.strokeStyle=`rgba(220, 38, 38, ${risk*0.7})`; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.arc(nx,ny,radius+10+risk*18,0,Math.PI*2); ctx.stroke();
     }
 
-    ctx.shadowBlur=0; ctx.fillStyle = risk>0.3?'#fff':col;
-    // Larger font for presentation
-    ctx.font=`bold ${Math.floor(11+nd.crit*3)}px 'Fira Code', monospace`;
+    // Node Text
+    ctx.fillStyle = '#0f172a'; // Slate 900
+    ctx.font=`bold ${Math.floor(18+nd.crit*4)}px 'Inter', sans-serif`;
     ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(nd.label,nx,ny);
 
+    // Risk Metric Text
     if(risk>0.03) {
-      ctx.fillStyle=risk>0.5?'#fca5a5':'#fdba74';
-      ctx.font='10px "Fira Code", monospace';
-      ctx.fillText(risk.toFixed(2),nx,ny+radius+10);
+      ctx.fillStyle = risk>0.5 ? '#b91c1c' : '#b45309';
+      ctx.font='bold 15px "SFMono-Regular", monospace';
+      ctx.fillText(risk.toFixed(2),nx,ny+radius+18);
     }
   });
 
   const vNow=computeV(x);
-  ctx.shadowBlur=0; ctx.fillStyle='rgba(0,0,0,0.7)'; ctx.fillRect(10,H-30,W-20,24);
-  ctx.fillStyle=col; ctx.font='12px "Fira Code", monospace'; ctx.textAlign='left'; ctx.textBaseline='middle';
-  ctx.fillText(`V(x) = ${vNow.toFixed(4)}  |  t = ${step}`, 16, H-18);
+  ctx.fillStyle='#f8fafc'; ctx.fillRect(10,H-40,280,30);
+  ctx.strokeStyle='#cbd5e1'; ctx.lineWidth=1; ctx.strokeRect(10,H-40,280,30);
+  ctx.fillStyle='#334155'; ctx.font='bold 16px "SFMono-Regular", monospace'; ctx.textAlign='left'; ctx.textBaseline='middle';
+  ctx.fillText(`V(x) = ${vNow.toFixed(4)} | t = ${step}`, 20, H-25);
 }
 
 function renderVChart(c) {
   const canvas=document.getElementById(`vc-${c}`); if(!canvas) return;
   const ctx=canvas.getContext('2d'); const W=canvas.width, H=canvas.height;
-  ctx.clearRect(0,0,W,H); ctx.fillStyle='#080b12'; ctx.fillRect(0,0,W,H);
+  ctx.clearRect(0,0,W,H); ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,W,H);
 
   const hist=vHist[c]; if(hist.length<2) return;
   const maxV=Math.max(...hist,0.01); const col=CCOLORS[c];
 
-  ctx.strokeStyle='rgba(239, 68, 68, 0.3)'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+  ctx.strokeStyle='#cbd5e1'; ctx.lineWidth=2; ctx.setLineDash([6,6]);
   ctx.beginPath(); ctx.moveTo(0,H*0.15); ctx.lineTo(W,H*0.15); ctx.stroke(); ctx.setLineDash([]);
 
-  ctx.strokeStyle=col; ctx.lineWidth=2; ctx.shadowColor=col; ctx.shadowBlur=6;
+  ctx.strokeStyle=col; ctx.lineWidth=4; 
   ctx.beginPath();
   hist.forEach((v,i)=>{
-    const px=(i/(hist.length-1))*W; const py=H-(v/maxV)*H*0.85-H*0.05;
+    const px=(i/(hist.length-1))*W; const py=H-(v/maxV)*H*0.80-H*0.10;
     i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
   });
-  ctx.stroke(); ctx.shadowBlur=0;
+  ctx.stroke(); 
 }
 
 function updateStats() {
@@ -753,7 +802,7 @@ function updateStats() {
     const pct=Math.min(100,v*220);
     document.getElementById(`c-${c}-cre`).textContent=Math.floor(m.cre).toLocaleString();
     const issEl=document.getElementById(`c-${c}-iss`);
-    issEl.textContent=`ISS:${m.iss}`; issEl.className=`stat-iss${m.iss===0?' zero':''}`;
+    issEl.textContent=`ISS Violations: ${m.iss}`; issEl.className=`stat-iss${m.iss===0?' zero':''}`;
     document.getElementById(`c-${c}-vx`).textContent=v.toFixed(3);
     document.getElementById(`b-${c}`).style.width=pct+'%';
   });
@@ -779,18 +828,17 @@ function selScenario(i, btn) {
 function toggleRun() { running ? stopSim() : startSim(); }
 function startSim() {
   if(running) return; running=true;
-  document.getElementById('runBtn').textContent='PAUSE SIM';
-  glog(`START: ${SCENARIOS[curScenario].name}`, 'info'); schedule();
+  document.getElementById('runBtn').textContent='Pause Simulation';
+  glog(`[System Ready] Initiating Scenario: ${SCENARIOS[curScenario].name}`, 'info'); schedule();
 }
 function schedule() { if(!running) return; timer=setTimeout(()=>{ tick(); schedule(); }, delay); }
-function stopSim() { running=false; clearTimeout(timer); document.getElementById('runBtn').textContent='EXECUTE SIM'; }
+function stopSim() { running=false; clearTimeout(timer); document.getElementById('runBtn').textContent='Resume Simulation'; }
 
 function resetSim() {
-  stopSim(); initSim();
+  stopSim(); initSim(); document.getElementById('runBtn').textContent='Execute Simulation';
   document.getElementById('log-sfca').innerHTML=''; document.getElementById('log-global').innerHTML='';
   renderAll();
-  glog(`LOADED: ${SCENARIOS[curScenario].name}`, 'info');
-  glog('CONTROLLERS: SFCA | DQN | REACTIVE SOAR | NO-OP', 'info');
+  glog(`[Data Loaded] Scenario Base: ${SCENARIOS[curScenario].name}`, 'info');
 }
 
 function setSpeed(v) { delay=Math.max(8, Math.floor(180/v)); document.getElementById('spdLbl').textContent=v+'x'; }
@@ -808,22 +856,22 @@ function glog(msg,type) {
   el.appendChild(d); if(el.children.length>80) el.removeChild(el.firstChild); el.scrollTop=el.scrollHeight;
 }
 
-function updateStepEl() { document.getElementById('step-display').textContent=`STEP: ${step}/${SCENARIOS[curScenario].dur}`; }
+function updateStepEl() { document.getElementById('step-display').textContent=`Simulation Step: ${step} / ${SCENARIOS[curScenario].dur}`; }
 
 // ═══════════════════════════════════════════════════════════════
-// CHARTS
+// DATA VISUALIZATION (CHARTS)
 // ═══════════════════════════════════════════════════════════════
 function drawAllCharts() { drawISSChart(); drawCREChart(); drawScenarioChart(); drawBlockChart(); }
 
 function chartBase(id) {
   const canvas=document.getElementById(id); const ctx=canvas.getContext('2d');
   const W=canvas.width, H=canvas.height;
-  ctx.clearRect(0,0,W,H); ctx.fillStyle='#080b12'; ctx.fillRect(0,0,W,H);
+  ctx.clearRect(0,0,W,H); ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,W,H);
   return {ctx,W,H};
 }
 
 function drawAxes(ctx,pad,W,H) {
-  ctx.strokeStyle='rgba(255,255,255,0.2)'; ctx.lineWidth=2;
+  ctx.strokeStyle='#94a3b8'; ctx.lineWidth=3;
   ctx.beginPath(); ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,H-pad.b); ctx.lineTo(W-pad.r,H-pad.b); ctx.stroke();
 }
 
@@ -831,15 +879,15 @@ function drawGridH(ctx,pad,W,H,ticks) {
   const cH=H-pad.t-pad.b;
   ticks.forEach(({frac,label})=>{
     const y=pad.t+cH-frac*cH;
-    ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.lineWidth=1;
+    ctx.strokeStyle='#e2e8f0'; ctx.lineWidth=2;
     ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(W-pad.r,y); ctx.stroke();
-    ctx.fillStyle='rgba(255,255,255,0.5)'; ctx.font='11px "Fira Code", monospace'; ctx.textAlign='right';
-    ctx.fillText(label,pad.l-8,y+4);
+    ctx.fillStyle='#64748b'; ctx.font='16px "Inter", sans-serif'; ctx.textAlign='right'; ctx.textBaseline='middle';
+    ctx.fillText(label,pad.l-16,y);
   });
 }
 
 function drawISSChart() {
-  const {ctx,W,H}=chartBase('ch-iss'); const pad={t:40,r:20,b:60,l:60};
+  const {ctx,W,H}=chartBase('ch-iss'); const pad={t:60,r:40,b:100,l:100};
   const cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
   const data=PAPER.issViol, labels=PAPER.ctrlNames, colors=PAPER.ctrlColors;
   const maxLog=Math.log10(110);
@@ -849,136 +897,137 @@ function drawISSChart() {
     {frac:Math.log10(10+0.1)/maxLog, label:'10'}, {frac:Math.log10(100+0.1)/maxLog, label:'100'},
   ]);
 
-  const bw=cW/data.length*0.65, gap=cW/data.length;
+  const bw=cW/data.length*0.7, gap=cW/data.length;
   data.forEach((v,i)=>{
-    const x=pad.l+i*gap+gap*0.17; const logH = v<0.005 ? 0 : (Math.log10(v+0.1)/maxLog)*cH;
+    const x=pad.l+i*gap+gap*0.15; const logH = v<0.005 ? 0 : (Math.log10(v+0.1)/maxLog)*cH;
     const y=pad.t+cH-logH;
     ctx.fillStyle=colors[i]; ctx.fillRect(x,y,bw,logH);
-    ctx.fillStyle=colors[i]; ctx.font='bold 12px "Fira Code", monospace'; ctx.textAlign='center';
-    ctx.fillText(v===0?'ZERO':v.toFixed(1), x+bw/2, y-8);
-    ctx.fillStyle='rgba(255,255,255,0.7)'; ctx.font='11px "Inter", sans-serif';
-    ctx.save(); ctx.translate(x+bw/2,pad.t+cH+15); ctx.rotate(-Math.PI/6);
+    ctx.fillStyle=colors[i]; ctx.font='bold 20px "Inter", sans-serif'; ctx.textAlign='center';
+    ctx.fillText(v===0?'ZERO':v.toFixed(1), x+bw/2, y-12);
+    ctx.fillStyle='#334155'; ctx.font='18px "Inter", sans-serif';
+    ctx.save(); ctx.translate(x+bw/2,pad.t+cH+25); ctx.rotate(-Math.PI/8);
     ctx.textAlign='right'; ctx.fillText(labels[i],0,0); ctx.restore();
   });
   drawAxes(ctx,pad,W,H);
-  ctx.fillStyle='rgba(255,255,255,0.5)'; ctx.font='12px "Inter", sans-serif'; ctx.textAlign='left';
-  ctx.fillText('ISS VIOLATIONS (log scale — lower is safer)',pad.l,25);
-  ctx.fillStyle='#10b981'; ctx.font='bold 12px "Fira Code", monospace'; ctx.textAlign='center';
-  ctx.fillText('← ZERO ✓',pad.l+cW/data.length*0.5,pad.t+cH-10);
+  ctx.fillStyle='#475569'; ctx.font='italic 18px "Inter", sans-serif'; ctx.textAlign='left';
+  ctx.fillText('Note: Lower values indicate superior mathematical safety.',pad.l,35);
+  ctx.fillStyle='#059669'; ctx.font='bold 18px "Inter", sans-serif'; ctx.textAlign='center';
+  ctx.fillText('← Guaranteed Stability ✓',pad.l+cW/data.length*0.5,pad.t+cH-15);
 }
 
 function drawCREChart() {
-  const {ctx,W,H}=chartBase('ch-cre'); const pad={t:40,r:20,b:60,l:70};
+  const {ctx,W,H}=chartBase('ch-cre'); const pad={t:60,r:40,b:100,l:120};
   const cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
   const data=PAPER.meanCRE, labels=PAPER.ctrlNames, colors=PAPER.ctrlColors;
   const maxV=Math.max(...data);
 
   [0.25,0.5,0.75,1.0].forEach(f=>{
     const y=pad.t+cH-f*cH;
-    ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.lineWidth=1;
+    ctx.strokeStyle='#e2e8f0'; ctx.lineWidth=2;
     ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(W-pad.r,y); ctx.stroke();
-    ctx.fillStyle='rgba(255,255,255,0.5)'; ctx.font='11px "Fira Code", monospace'; ctx.textAlign='right';
-    ctx.fillText(Math.floor(f*maxV/1000)+'K',pad.l-8,y+4);
+    ctx.fillStyle='#64748b'; ctx.font='16px "Inter", sans-serif'; ctx.textAlign='right'; ctx.textBaseline='middle';
+    ctx.fillText(Math.floor(f*maxV/1000)+'K',pad.l-16,y);
   });
 
-  const bw=cW/data.length*0.65, gap=cW/data.length;
+  const bw=cW/data.length*0.7, gap=cW/data.length;
   data.forEach((v,i)=>{
-    const x=pad.l+i*gap+gap*0.17; const bH=(v/maxV)*cH, y=pad.t+cH-bH;
+    const x=pad.l+i*gap+gap*0.15; const bH=(v/maxV)*cH, y=pad.t+cH-bH;
     ctx.fillStyle=colors[i]; ctx.fillRect(x,y,bw,bH);
-    ctx.fillStyle=colors[i]; ctx.font='bold 12px "Fira Code", monospace'; ctx.textAlign='center';
-    ctx.fillText((v/1000).toFixed(0)+'K',x+bw/2,y-8);
-    ctx.fillStyle='rgba(255,255,255,0.7)'; ctx.font='11px "Inter", sans-serif';
-    ctx.save(); ctx.translate(x+bw/2,pad.t+cH+15); ctx.rotate(-Math.PI/6);
+    ctx.fillStyle=colors[i]; ctx.font='bold 20px "Inter", sans-serif'; ctx.textAlign='center';
+    ctx.fillText((v/1000).toFixed(0)+'K',x+bw/2,y-12);
+    ctx.fillStyle='#334155'; ctx.font='18px "Inter", sans-serif';
+    ctx.save(); ctx.translate(x+bw/2,pad.t+cH+25); ctx.rotate(-Math.PI/8);
     ctx.textAlign='right'; ctx.fillText(labels[i],0,0); ctx.restore();
   });
   drawAxes(ctx,pad,W,H);
-  ctx.fillStyle='rgba(255,255,255,0.5)'; ctx.font='12px "Inter", sans-serif'; ctx.textAlign='left';
-  ctx.fillText('MEAN CRE (SFCA specifically trades CRE for absolute ISS guarantee)',pad.l,25);
+  ctx.fillStyle='#475569'; ctx.font='italic 18px "Inter", sans-serif'; ctx.textAlign='left';
+  ctx.fillText('Tradeoff Observation: SFCA inherently accepts higher CRE to satisfy absolute stability limits.',pad.l,35);
 }
 
 function drawScenarioChart() {
-  const {ctx,W,H}=chartBase('ch-scenario'); const pad={t:40,r:100,b:60,l:70};
+  const {ctx,W,H}=chartBase('ch-scenario'); const pad={t:60,r:160,b:100,l:120};
   const cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
   const scs=PAPER.scNames, ctrlKeys=['SFCA','DQN','Thr','SOAR','NoOp'];
-  const ctrlCols=['#10b981','#8b5cf6','#eab308','#f97316','#64748b'];
+  const ctrlCols=['#2563eb','#7c3aed','#fbbf24','#ea580c','#94a3b8'];
   const maxV=Math.max(...ctrlKeys.flatMap(k=>PAPER.scCRE[k]));
 
   [0.2,0.4,0.6,0.8,1.0].forEach(f=>{
-    const y=pad.t+cH-f*cH; ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.lineWidth=1;
+    const y=pad.t+cH-f*cH; ctx.strokeStyle='#e2e8f0'; ctx.lineWidth=2;
     ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(W-pad.r,y); ctx.stroke();
-    ctx.fillStyle='rgba(255,255,255,0.5)'; ctx.font='11px "Fira Code", monospace'; ctx.textAlign='right';
-    ctx.fillText(Math.floor(f*maxV/1000)+'K',pad.l-6,y+4);
+    ctx.fillStyle='#64748b'; ctx.font='16px "Inter", sans-serif'; ctx.textAlign='right'; ctx.textBaseline='middle';
+    ctx.fillText(Math.floor(f*maxV/1000)+'K',pad.l-16,y);
   });
 
-  const gw=cW/scs.length, bw=gw/ctrlKeys.length*0.8;
+  const gw=cW/scs.length, bw=gw/ctrlKeys.length*0.85;
   scs.forEach((sc,si)=>{
     ctrlKeys.forEach((k,ki)=>{
-      const v=PAPER.scCRE[k][si]; const x=pad.l+si*gw+ki*bw+4;
+      const v=PAPER.scCRE[k][si]; const x=pad.l+si*gw+ki*bw+6;
       const bH=(v/maxV)*cH, y=pad.t+cH-bH;
       ctx.fillStyle=ctrlCols[ki]; ctx.fillRect(x,y,bw-2,bH);
     });
-    ctx.fillStyle='rgba(255,255,255,0.7)'; ctx.font='11px "Inter", sans-serif'; ctx.textAlign='center';
-    ctx.fillText(sc,pad.l+si*gw+gw/2,pad.t+cH+20);
+    ctx.fillStyle='#334155'; ctx.font='bold 18px "Inter", sans-serif'; ctx.textAlign='center';
+    ctx.fillText(sc,pad.l+si*gw+gw/2,pad.t+cH+35);
   });
 
+  // Legend
   ctrlKeys.forEach((k,i)=>{
-    const lx=W-pad.r+15, ly=pad.t+i*24;
-    ctx.fillStyle=ctrlCols[i]; ctx.fillRect(lx,ly,14,14);
-    ctx.fillStyle='rgba(255,255,255,0.8)'; ctx.font='12px "Inter", sans-serif'; ctx.textAlign='left'; ctx.textBaseline='middle';
-    ctx.fillText(k,lx+22,ly+7);
+    const lx=W-pad.r+30, ly=pad.t+i*40;
+    ctx.fillStyle=ctrlCols[i]; ctx.fillRect(lx,ly,24,24);
+    ctx.fillStyle='#1e293b'; ctx.font='18px "Inter", sans-serif'; ctx.textAlign='left'; ctx.textBaseline='middle';
+    ctx.fillText(k,lx+40,ly+12);
   });
   drawAxes(ctx,pad,W,H);
-  ctx.fillStyle='rgba(255,255,255,0.5)'; ctx.font='12px "Inter", sans-serif'; ctx.textAlign='left';
-  ctx.fillText('CRE BY SCENARIO',pad.l,25);
+  ctx.fillStyle='#475569'; ctx.font='italic 18px "Inter", sans-serif'; ctx.textAlign='left';
+  ctx.fillText('Distribution of Cumulative Risk Energy (CRE) recorded across the five test topologies.',pad.l,35);
 }
 
 function drawBlockChart() {
-  const {ctx,W,H}=chartBase('ch-block'); const pad={t:50,r:20,b:60,l:50};
+  const {ctx,W,H}=chartBase('ch-block'); const pad={t:80,r:60,b:100,l:100};
   const cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
   const scs=PAPER.scNames, sfcaA=PAPER.sfcaAct, ngA=PAPER.nogovAct, bR=PAPER.blockRate;
   const maxA=Math.max(...ngA);
 
   [0.25,0.5,0.75,1.0].forEach(f=>{
-    const y=pad.t+cH-f*cH; ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.lineWidth=1;
+    const y=pad.t+cH-f*cH; ctx.strokeStyle='#e2e8f0'; ctx.lineWidth=2;
     ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(W-pad.r,y); ctx.stroke();
-    ctx.fillStyle='rgba(255,255,255,0.5)'; ctx.font='11px "Fira Code", monospace'; ctx.textAlign='right';
-    ctx.fillText(Math.floor(f*maxA),pad.l-8,y+4);
+    ctx.fillStyle='#64748b'; ctx.font='16px "Inter", sans-serif'; ctx.textAlign='right'; ctx.textBaseline='middle';
+    ctx.fillText(Math.floor(f*maxA),pad.l-16,y);
   });
 
   const gw=cW/scs.length, bw=gw*0.35;
   scs.forEach((sc,i)=>{
-    const gx=pad.l+i*gw+gw*0.05;
+    const gx=pad.l+i*gw+gw*0.1;
     const sH=(sfcaA[i]/maxA)*cH, sy=pad.t+cH-sH;
-    ctx.fillStyle='#10b981'; ctx.fillRect(gx,sy,bw,sH);
-    ctx.font='bold 11px "Fira Code", monospace'; ctx.textAlign='center'; ctx.fillText(sfcaA[i],gx+bw/2,sy-8);
+    ctx.fillStyle='#2563eb'; ctx.fillRect(gx,sy,bw,sH);
+    ctx.font='bold 18px "Inter", sans-serif'; ctx.textAlign='center'; ctx.fillText(sfcaA[i],gx+bw/2,sy-12);
 
     const ngH=(ngA[i]/maxA)*cH, ngy=pad.t+cH-ngH;
-    ctx.fillStyle='rgba(16, 185, 129, 0.15)'; ctx.strokeStyle='rgba(16, 185, 129, 0.6)'; ctx.lineWidth=2;
-    ctx.fillRect(gx+bw+6,ngy,bw,ngH); ctx.strokeRect(gx+bw+6,ngy,bw,ngH);
-    ctx.fillStyle='rgba(255,255,255,0.7)'; ctx.font='11px "Fira Code", monospace'; ctx.textAlign='center';
-    ctx.fillText(ngA[i],gx+bw*1.5+6,ngy-8);
+    ctx.fillStyle='#eff6ff'; ctx.strokeStyle='#2563eb'; ctx.lineWidth=3;
+    ctx.fillRect(gx+bw+10,ngy,bw,ngH); ctx.strokeRect(gx+bw+10,ngy,bw,ngH);
+    ctx.fillStyle='#64748b'; ctx.font='18px "Inter", sans-serif'; ctx.textAlign='center';
+    ctx.fillText(ngA[i],gx+bw*1.5+10,ngy-12);
 
-    ctx.fillStyle='#f97316'; ctx.font='bold 13px "Inter", sans-serif';
-    ctx.fillText(bR[i]+'%',gx+bw+3,pad.t+cH+20);
-    ctx.fillStyle='rgba(255,255,255,0.6)'; ctx.font='11px "Inter", sans-serif';
-    ctx.fillText(sc.split(' ')[0],gx+bw+3,pad.t+cH+35);
+    ctx.fillStyle='#ea580c'; ctx.font='bold 22px "Inter", sans-serif';
+    ctx.fillText(bR[i]+'%',gx+bw+5,pad.t+cH+35);
+    ctx.fillStyle='#475569'; ctx.font='18px "Inter", sans-serif';
+    ctx.fillText(sc.split(' ')[0],gx+bw+5,pad.t+cH+60);
   });
 
   drawAxes(ctx,pad,W,H);
-  ctx.fillStyle='rgba(255,255,255,0.5)'; ctx.font='12px "Inter", sans-serif'; ctx.textAlign='left';
-  ctx.fillText('ACTIONS PER RUN: SFCA (solid) vs NoGov (outline)',pad.l,20);
-  ctx.fillStyle='#f97316'; ctx.fillText('% = governor block rate',pad.l,35);
+  ctx.fillStyle='#475569'; ctx.font='italic 18px "Inter", sans-serif'; ctx.textAlign='left';
+  ctx.fillText('Graph depicting proposed action volume vs actual execution after Governor filtering.',pad.l,35);
+  ctx.fillStyle='#ea580c'; ctx.fillText('Percentage denotes Governor interception rate.',pad.l,55);
 
-  ctx.fillStyle='#10b981'; ctx.fillRect(W-180,25,14,14);
-  ctx.fillStyle='rgba(255,255,255,0.8)'; ctx.font='12px "Inter", sans-serif'; ctx.textAlign='left'; ctx.textBaseline='middle';
-  ctx.fillText('SFCA',W-155,32);
-  ctx.fillStyle='rgba(16, 185, 129, 0.15)'; ctx.fillRect(W-100,25,14,14);
-  ctx.strokeStyle='rgba(16, 185, 129, 0.6)'; ctx.lineWidth=2; ctx.strokeRect(W-100,25,14,14);
-  ctx.fillStyle='rgba(255,255,255,0.8)'; ctx.fillText('NoGov',W-75,32);
+  ctx.fillStyle='#2563eb'; ctx.fillRect(W-300,40,24,24);
+  ctx.fillStyle='#1e293b'; ctx.font='18px "Inter", sans-serif'; ctx.textAlign='left'; ctx.textBaseline='middle';
+  ctx.fillText('SFCA Actions',W-260,52);
+  ctx.fillStyle='#eff6ff'; ctx.fillRect(W-120,40,24,24);
+  ctx.strokeStyle='#2563eb'; ctx.lineWidth=3; ctx.strokeRect(W-120,40,24,24);
+  ctx.fillStyle='#1e293b'; ctx.fillText('NoGov',W-80,52);
 }
 
 // ═══════════════════════════════════════════════════════════════
-// GOVERNOR DEMO
+// GOVERNOR STEP-THROUGH DEMO
 // ═══════════════════════════════════════════════════════════════
 async function govDemo() {
   const ids=['gl-input','gl-l1','gl-l2','gl-l3','gl-approve','gl-block'];
@@ -996,71 +1045,70 @@ async function govDemo() {
   function gl(msg,type){ const d=document.createElement('div'); d.className=`log-entry ${type}`; d.textContent=msg; log.appendChild(d); log.scrollTop=log.scrollHeight; }
   function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
-  gl('─── GOVERNOR CHECK INITIATED ───','info'); await wait(150);
+  gl('─── Security Check Routine Triggered ───','info'); await wait(150);
 
-  document.getElementById('gl-input').className='gov-layer checking'; document.getElementById('gs-input').textContent='RECV';
-  gl(`MPC PROPOSAL: ${act}`,'approve'); await wait(550);
-  document.getElementById('gl-input').className='gov-layer pass'; document.getElementById('gs-input').textContent='✓ IN'; await wait(200);
+  document.getElementById('gl-input').className='gov-layer checking'; document.getElementById('gs-input').textContent='RECEIVING';
+  gl(`MPC Request Payload: ${act}`,'approve'); await wait(600);
+  document.getElementById('gl-input').className='gov-layer pass'; document.getElementById('gs-input').textContent='VALID'; await wait(300);
 
-  document.getElementById('gl-l1').className='gov-layer checking'; document.getElementById('gs-l1').textContent='EVAL…';
-  gl('L1 › Computing V(x_{t+k}) with d_max=0.300 bound...','info'); await wait(700);
+  document.getElementById('gl-l1').className='gov-layer checking'; document.getElementById('gs-l1').textContent='PROCESSING...';
+  gl('Layer 1 › Projecting V(x_{t+k}) over limit d_max=0.300','info'); await wait(800);
 
   if(willBlock) {
-    document.getElementById('gl-l1').className='gov-layer fail'; document.getElementById('gs-l1').textContent='✗ FAIL';
-    gl(`L1 › V_curr=${vCurr}  V_pred=${vPred}  bound=${bound}`,'attack');
-    gl('L1 › VIOLATION: V_pred > bound — ISS constraint broken','attack'); gl('L1 › Blocking proposal → NO-OP','block'); await wait(300);
-    document.getElementById('gl-block').className='gov-layer fail'; gl('RESULT: NO-OP EXECUTES · ISS counter unchanged (0)','block');
+    document.getElementById('gl-l1').className='gov-layer fail'; document.getElementById('gs-l1').textContent='VIOLATION';
+    gl(`Layer 1 › V_current = ${vCurr} | V_predicted = ${vPred} | Threshold Limit = ${bound}`,'attack');
+    gl('Layer 1 › CRITICAL ERROR: V_predicted exceeds strict bounds. ISS constraint violated.','attack'); gl('Layer 1 › Force blocking proposal to protect network state.','block'); await wait(400);
+    document.getElementById('gl-block').className='gov-layer fail'; gl('End Result: NO-OP Exectuted · Stability Counter Protected (0)','block');
   } else {
-    document.getElementById('gl-l1').className='gov-layer pass'; document.getElementById('gs-l1').textContent='✓ OK';
-    gl(`L1 › V_curr=${vCurr}  V_pred=${vPred}  bound=${bound}  ✓`,'approve'); await wait(250);
+    document.getElementById('gl-l1').className='gov-layer pass'; document.getElementById('gs-l1').textContent='PASSED';
+    gl(`Layer 1 › V_current=${vCurr} | V_predicted=${vPred} | Threshold Limit=${bound} (Clear)`,'approve'); await wait(300);
 
-    document.getElementById('gl-l2').className='gov-layer checking'; document.getElementById('gs-l2').textContent='EVAL…';
-    gl('L2 › Cooldown check...','info'); await wait(480);
-    document.getElementById('gl-l2').className='gov-layer pass'; document.getElementById('gs-l2').textContent='✓ OK';
-    gl('L2 › Cooldown=0 cycles ✓','approve'); await wait(200);
+    document.getElementById('gl-l2').className='gov-layer checking'; document.getElementById('gs-l2').textContent='PROCESSING...';
+    gl('Layer 2 › Verifying Action Cooldown Timers','info'); await wait(500);
+    document.getElementById('gl-l2').className='gov-layer pass'; document.getElementById('gs-l2').textContent='PASSED';
+    gl('Layer 2 › Cooldown=0 cycles (Clear)','approve'); await wait(300);
 
-    document.getElementById('gl-l3').className='gov-layer checking'; document.getElementById('gs-l3').textContent='EVAL…';
-    gl('L3 › Isolation cap check...','info'); await wait(450);
-    document.getElementById('gl-l3').className='gov-layer pass'; document.getElementById('gs-l3').textContent='✓ OK';
-    gl('L3 › Concurrent isolations=1 < max=3 ✓','approve'); await wait(200);
+    document.getElementById('gl-l3').className='gov-layer checking'; document.getElementById('gs-l3').textContent='PROCESSING...';
+    gl('Layer 3 › Verifying Operating Cap limitations','info'); await wait(500);
+    document.getElementById('gl-l3').className='gov-layer pass'; document.getElementById('gs-l3').textContent='PASSED';
+    gl('Layer 3 › Concurrent Isolations: 1 < Max Cap: 3 (Clear)','approve'); await wait(300);
     
-    document.getElementById('gl-approve').className='gov-layer pass'; gl(`RESULT: ${act} APPROVED AND EXECUTING`,'approve');
-    gl('ISS violation counter: 0 (guaranteed zero across all runs)','approve');
+    document.getElementById('gl-approve').className='gov-layer pass'; gl(`End Result: ${act} CERTIFIED AND EXECUTING`,'approve');
+    gl('Cumulative Violation State: 0','approve');
   }
 }
 
 // ═══════════════════════════════════════════════════════════════
-// RESULTS TABLE
+// DATA TABLES
 // ═══════════════════════════════════════════════════════════════
 function buildResultsTable() {
   const tbody=document.getElementById('tbl-results'); if(!tbody) return;
   tbody.innerHTML='';
   const rows=[
-    ['SFCA (ours)',    74641,   0.00,   '0/150',    '#10b981'],
-    ['SFCANoGov',     19308,  63.45,   '150/150',  '#34d399'],
-    ['Threshold',     13470,  19.79,   '150/150',  '#eab308'],
-    ['React. SOAR',   22219,  16.93,   '122/150',  '#f97316'],
-    ['DQN',            9657, 100.32,   '150/150',  '#8b5cf6'],
-    ['NoOp',         272392,   0.00,   '0/150',    '#64748b'],
+    ['SFCA (Proposed Framework)',    74641,   0.00,   '0/150',    '#2563eb', true],
+    ['SFCA-NoGov (Ablation)',     19308,  63.45,   '150/150',  '#38bdf8', false],
+    ['Threshold Approach',     13470,  19.79,   '150/150',  '#fbbf24', false],
+    ['Reactive SOAR',   22219,  16.93,   '122/150',  '#ea580c', false],
+    ['DQN RL Agent',            9657, 100.32,   '150/150',  '#7c3aed', false],
+    ['Static No-Op',         272392,   0.00,   '0/150',    '#94a3b8', false],
   ];
-  rows.forEach(([name,cre,iss,runs,col])=>{
+  rows.forEach(([name,cre,iss,runs,col,isPrimary])=>{
     const tr=document.createElement('tr');
     tr.innerHTML=`
-      <td style="color:${col};font-weight:bold;">${name}</td>
-      <td style="text-align:right;color:var(--text-muted);">${cre.toLocaleString()}</td>
-      <td style="text-align:right;color:${iss===0?'var(--neon-green)':'var(--neon-red)'};font-weight:bold;">${iss.toFixed(2)}</td>
-      <td style="text-align:right;color:var(--text-muted);">${runs}</td>`;
+      <td style="color:${col};font-weight:700;">${name}</td>
+      <td style="text-align:right; font-family: monospace; font-size:1.1rem; color:var(--text-secondary);">${cre.toLocaleString()}</td>
+      <td style="text-align:right; font-family: monospace; font-size:1.1rem; color:${iss===0?'var(--status-success)':'var(--status-danger)'};font-weight:700;">${iss.toFixed(2)}</td>
+      <td style="text-align:right; font-family: monospace; font-size:1.1rem; color:var(--text-secondary);">${runs}</td>`;
     tbody.appendChild(tr);
   });
 }
 
 // ═══════════════════════════════════════════════════════════════
-// BOOT
+// BOOTSTRAPPING
 // ═══════════════════════════════════════════════════════════════
 initSim(); renderAll(); buildResultsTable();
-glog('SFCA CYBER DEFENSE MATRIX — SYSTEM ONLINE','info');
-glog('SELECT A SCENARIO AND PRESS EXECUTE SIM','info');
-glog('Comparing: SFCA · DQN · REACTIVE SOAR · NO-OP','info');
+glog('System Initialization Complete. Dashboard Online.','info');
+glog('Awaiting operator command to commence simulation bounds.','info');
 </script>
 </body>
 </html>
